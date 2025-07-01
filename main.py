@@ -1,4 +1,5 @@
 from fastapi import FastAPI
+from schema import *
 
 api = FastAPI()
 
@@ -12,7 +13,7 @@ all_todos = [
 ]
 
 
-#pass parameter
+#pass parameter 
 @api.get('/todos/{todo_id}')
 def get_todo(todo_id: int):
     for todo in all_todos:
@@ -41,8 +42,8 @@ def create_todo(todo:dict):
     }
 
     all_todos.append(new_todo)
-
     return new_todo
+
 
 @api.put('/todos/{todo_id}')
 def update_todo(todo_id: int, updated_todo: dict):
@@ -52,6 +53,7 @@ def update_todo(todo_id: int, updated_todo: dict):
             todo['todo_description'] = updated_todo['todo_description']
             return todo
     return 'Error, Not found...'
+
 
 @api.delete('/todo/{todo_id}')
 def delete_todo(todo_id: int):
